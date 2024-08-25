@@ -1,7 +1,6 @@
 import igraph
 from igraph import Graph
 from typing import List
-from copy import deepcopy
 
 def check(adj : List[List[int]], colors) -> bool:
     if len(colors) == 0:
@@ -33,8 +32,6 @@ def bkt(adj : List[List[int]], colors, k : int):
         return False, {}
     
     for color in range(k):
-        # new_colors = deepcopy(colors)
-
         colors[node] = color
         ok, result = bkt(adj, colors, k)
 
@@ -68,3 +65,10 @@ def solve_bkt(graph : Graph):
             start = med + 1
     
     return optimal_count, optimal_coloring
+
+# graph = Graph.Erdos_Renyi(n=60, m=150)
+
+# count, colors = solve_bkt(graph)
+
+# print(graph)
+# print(colors)

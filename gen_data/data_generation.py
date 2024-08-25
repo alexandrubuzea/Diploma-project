@@ -75,7 +75,7 @@ def to_one_hot(n : int):
     l = len(result)
 
     result += [0 for _ in range(MAX_NODES - l)]
-    return reversed(result)
+    return list(reversed(result))
 
 def compressed_to_adj(l : List[int]):
     return [to_one_hot(elem) for elem in l]
@@ -115,8 +115,8 @@ def load_graphs(directory : str, n : int):
         read_file = Path(filename)
 
         with read_file.open('r') as fin:
-            adj = list(map(int, fin.readline().split(' ')))
-            colors = list(map(int, fin.readline().split(' ')))
+            adj = list(map(int, fin.readline().strip().split(' ')))
+            colors = list(map(int, fin.readline().strip().split(' ')))
 
             data.append(compressed_to_adj(adj))
             colorings.append(colors)
